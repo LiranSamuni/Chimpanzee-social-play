@@ -10,13 +10,13 @@ df1=read.csv("/dataset_model1.csv")
 ##fitting models
 
 
-#model 1 - social and ecological conditions impacting the play likelihood of adult chimpanzees
+#model 1a - social and ecological conditions impacting the play likelihood of adult chimpanzees with partners of all ages
 m1priors <- c(
   prior(normal(0, 2.5), class = "Intercept"),
   prior(normal(0, 2.5), class = "b")
 )
 
-model1=brm(play ~ z.age+z.rank+group+sin.date+cos.date+z.food+enc+hunt*sex+z.party+oestrus+offset(log(observation.duration))+
+model1=brm(play_all ~ z.age+z.rank+group+sin.date+cos.date+z.food+enc+hunt*sex+z.party+oestrus+offset(log(observation.duration))+
                  (1+z.party+z.food+sin.date+cos.date||Focal) +
                  (1+z.age+z.rank+z.party||day.id),
 	data=df1, family = bernoulli(link = 'logit'), control = list(adapt_delta = 0.9),
@@ -37,6 +37,19 @@ summary(model1,
 bayes_R2(model1)
 
 
+#model 1b - social and ecological conditions impacting the play likelihood of adult chimpanzees with adult partners
+
+
+model1b=brm(adult_adult_play ~ z.age+z.rank+group+sin.date+cos.date+z.food+enc+hunt+z.party+oestrus*sex+offset(log(observation.duration))+
+                 (1+z.party+z.food+sin.date+cos.date||Focal) +
+                 (1+z.age+z.rank+z.party||day.id),
+    data=df1, family = bernoulli(link = 'logit'), control = list(adapt_delta = 0.9),
+    prior = m1priors,
+    warmup = 500,
+    iter = 3000,
+    cores = 5,
+    chains = 4,
+    seed = 123)
 
 
 
