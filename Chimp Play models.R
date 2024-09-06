@@ -127,7 +127,7 @@ for (i in 1:num_permutations) {
   permuted_data$time.encounter[permuted_data$nums%in%sel$nums]=sample_times
   
   }
-  permuted_data$b=(permuted_data$time.encounter)-permuted_data$time_min
+  permuted_data$b=(permuted_data$time.encounter)-permuted_data$time_play_min
   permuted_data$before.enc=0
   permuted_data$before.enc[permuted_data$b>=0]=1
   permuted_statistics1[i] <- length(unique(permuted_data$day.id[permuted_data$before.enc==1]))/length(unique(permuted_data$day.id))
@@ -161,7 +161,7 @@ for (i in 1:num_permutations) {
   permuted_data$time.hunt[permuted_data$nums%in%sel$nums]=sample_times
   
   }
-  permuted_data$b=(permuted_data$time.hunt)-permuted_data$time_min
+  permuted_data$b=(permuted_data$time.hunt)-permuted_data$time_play_min
   permuted_data$before.hunt=0
   permuted_data$before.hunt[permuted_data$b>=0]=1
   permuted_statistics2[i] <- length(unique(permuted_data$day.id[permuted_data$before.hunt==1]))/length(unique(permuted_data$day.id))
