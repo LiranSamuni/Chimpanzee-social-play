@@ -16,7 +16,8 @@ m1priors <- c(
   prior(normal(0, 2.5), class = "b")
 )
 
-model1=brm(play_all ~ z.age+z.rank+group+sin.date+cos.date+z.food+enc+hunt*sex+z.party+oestrus+offset(log(observation.duration))+
+#interaction between oestrus and sex, and encounter and sex were reduced from the model (89% credible intervals cross zero)
+model1=brm(play_all ~ z.age+z.rank+group+sin.date+cos.date+z.food+encounter+hunt*sex+z.party+oestrus+offset(log(observation.duration.hour))+
                  (1+z.party+z.food+sin.date+cos.date||Focal) +
                  (1+z.age+z.rank+z.party||day.id),
 	data=df1, family = bernoulli(link = 'logit'), control = list(adapt_delta = 0.9),
@@ -38,9 +39,10 @@ bayes_R2(model1)
 
 
 #model 1b - social and ecological conditions impacting the play likelihood of adult chimpanzees with adult partners
+#interaction between hunt and sex, and encounter and sex were reduced from the model (89% credible intervals cross zero)
 
 
-model1b=brm(adult_adult_play ~ z.age+z.rank+group+sin.date+cos.date+z.food+enc+hunt+z.party+oestrus*sex+offset(log(observation.duration))+
+model1b=brm(adult_adult_play ~ z.age+z.rank+group+sin.date+cos.date+z.food+encounter+hunt+z.party+oestrus*sex+offset(log(observation.duration.hour))+
                  (1+z.party+z.food+sin.date+cos.date||Focal) +
                  (1+z.age+z.rank+z.party||day.id),
     data=df1, family = bernoulli(link = 'logit'), control = list(adapt_delta = 0.9),
@@ -97,13 +99,15 @@ mean(bayes_R2(model2))
 #permutation procedures
 set.seed(555)
 
-#upload dataset that contains data on play behavior during intergroup encounter days
-enc_obs=read.csv("/observed_encounter.csv")
-#upload dataset that contains data on play behavior during non intergroup encounter days
-enc_exp=read.csv("/expected_encounter.csv")
+
+
+#upload dataset that contains data on play behavior with partners of all ages during intergroup encounter days
+enc_obs=read.csv("/observed_encounter_all_partners.csv")
+#upload dataset that contains data on play behavior with partners of all ages during non intergroup encounter days
+enc_exp=read.csv("/expected_encounter_all_partners.csv")
 
 ##how many days had play before the encounter
-observed_statistic1 <- length(unique(enc_obs$day.id[enc_obs$before.enc==1]))/length(unique(enc_obs$day.id))#0.76
+observed_statistic1 <- length(unique(enc_obs$day.id[enc_obs$before.enc==1]))/length(unique(enc_obs$day.id))
 
 # Permutation procedure - keep the focal information constant between the two datasets
 enc_exp=enc_exp[enc_exp$Focal%in%unique(enc_obs$Focal),]
@@ -135,13 +139,13 @@ mean(permuted_statistics1)
 
 
 ##hunt permutations
-#upload dataset that contains data on play behavior of males during hunting days
-hunt_obs=read.csv("/observed_hunt.csv")
-#upload dataset that contains data on play behavior of males during non-hunting days
-hunt_exp=read.csv("/expected_hunt.csv")# includes only focals that have data on hunting days
+#upload dataset that contains data on play behavior with partners of all ages of males during hunting days
+hunt_obs=read.csv("/observed_hunt_all_partners.csv")
+#upload dataset that contains data on play behavior with partners of all ages of males during non-hunting days
+hunt_exp=read.csv("/expected_hunt_all_partners.csv")# includes only focals that have data on hunting days
 
 ##how many days had play before the encounter
-observed_statistic2 <- length(unique(hunt_obs$day.id[hunt_obs$before.hunt==1]))/length(unique(hunt_obs$day.id))#0.82
+observed_statistic2 <- length(unique(hunt_obs$day.id[hunt_obs$before.hunt==1]))/length(unique(hunt_obs$day.id))
 
 num_permutations <- 1000
 
@@ -164,4 +168,12 @@ for (i in 1:num_permutations) {
 }
 
 mean(permuted_statistics2)
+
+
+
+#For repeating the procedure for adult adult play interactions upload
+encounter_obs_adult=read.csv("/observed_encounter_adult.csv")
+encounter_exp_adult=read.csv("/expected_encounter_adult.csv")
+hunt_obs_adult=read.csv("/observed_hunt_adult.csv")
+hunt_exp_adult=read.csv("/expected_hunt_adult.csv")
 
