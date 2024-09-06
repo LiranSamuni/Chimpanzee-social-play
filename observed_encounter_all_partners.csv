@@ -1,4 +1,4 @@
-Focal,day.id,before.enc,time.encounter,time_play_minutes,encounter_day
+Focal,day.id,before.enc,time.encounter,time_min,encounter_day
 Woodstock,Woodstock_2012-03-26,1,963,806,yes
 Wandy,Wandy_2013-04-03,1,720,496,yes
 Chantal,Chantal_2013-05-03,1,821,485,yes
@@ -85,11 +85,11 @@ Rwenzori,Rwenzori_2015-12-03,1,1001,463,yes
 Athos,Athos_2015-12-03,1,1001,817,yes
 Fredy,Fredy_2015-12-29,1,429,427,yes
 Richelieu,Richelieu_2016-01-23,1,982,569,yes
-Indira,Indira_2016-04-02,1,643,530,yes
 Willy,Willy_2016-06-06,1,1047,781,yes
 Fredy,Fredy_2016-06-07,1,615,477,yes
 Belle,Belle_2016-10-03,1,655,596,yes
 Perla,Perla_2016-11-08,0,959,1027,yes
+Richelieu,Richelieu_2016-11-21,1,798,552,yes
 Pandora,Pandora_2016-12-23,0,509,567,yes
 Kuba,Kuba_2016-12-25,1,630,408,yes
 Kinshasa,Kinshasa_2016-12-25,1,630,470,yes
@@ -98,5 +98,8 @@ Surprise,Surprise_2017-02-25,1,740,487,yes
 Pandora,Pandora_2017-03-02,1,1011,458,yes
 Belle,Belle_2017-03-10,0,733,875,yes
 Naomi,Naomi_2017-03-26,1,746,492,yes
+Rwenzori,Rwenzori_2017-04-24,1,591,466,yes
+Yeha,Yeha_2017-05-07,1,940,473,yes
+Fredy,Fredy_2017-05-10,0,647,688,yes
 Narcisse,Narcisse_2017-08-16,0,461,629,yes
 Porthos,Porthos_2017-10-14,0,423,863,yes
