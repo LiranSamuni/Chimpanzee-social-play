@@ -30,10 +30,7 @@ model1=brm(play_all ~ z.age+z.rank+group+sin.date+cos.date+z.food+encounter+hunt
 	
 
 
-summary(model1,
-        probs = c(0.05, 0.11, 0.5, 0.89, 0.95),
-        digits = 2)
-
+summary(model1)
 
 bayes_R2(model1)
 
@@ -83,9 +80,7 @@ model2 = stan_clogit(
 )
 
 
-summary(model2,
-        probs = c(0.05, 0.11, 0.5, 0.89, 0.95),
-        digits = 2)
+summary(model2)
 
 
 mean(bayes_R2(model2))
