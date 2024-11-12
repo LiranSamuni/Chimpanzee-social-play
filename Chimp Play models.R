@@ -34,6 +34,9 @@ summary(model1)
 
 bayes_R2(model1)
 
+library(bayestestR)
+hdi(model1, ci = c(.95, .89))
+
 
 #model 1b - social and ecological conditions impacting the play likelihood of adult chimpanzees with adult partners
 #interaction between hunt and sex, and encounter and sex were reduced from the model (89% credible intervals cross zero)
